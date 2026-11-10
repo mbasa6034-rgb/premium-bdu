@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>BDU PREMIUM</title>
+<style>
+:root{--bg:#F8F9FC;--card:#fff;--text:#111827;--sub:#6B7280;--p:#4F46E5;--a:#F59E0B}
+@media(prefers-color-scheme:dark){:root{--bg:#0F1220;--card:#1A1E33;--text:#F3F4F6;--sub:#9CA3AF}}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);padding-bottom:84px}
+.hero{background:linear-gradient(135deg,#4F46E5,#7C3AED);color:#fff;padding:36px 20px 48px;border-radius:0 0 28px 28px}
+.hero h1{font-size:26px}.hero p{opacity:.85;margin-top:6px;font-size:14px}
+.wrap{padding:0 16px;margin-top:-26px}
+.card{background:var(--card);border-radius:20px;padding:16px;margin-bottom:12px;box-shadow:0 4px 14px rgba(0,0,0,.08);display:flex;align-items:center;gap:14px}
+.ic{width:46px;height:46px;border-radius:14px;background:rgba(79,70,229,.12);display:grid;place-items:center;font-size:22px}
+.card h3{font-size:16px}.card small{color:var(--sub)}
+.tag{margin-left:auto;font-size:12px;font-weight:600;padding:4px 10px;border-radius:99px}
+.free{background:rgba(16,185,129,.15);color:#10B981}
+.lock{background:rgba(245,158,11,.15);color:#F59E0B}
+.btn{display:block;width:calc(100% - 32px);margin:12px 16px;padding:16px;border:0;border-radius:16px;background:var(--a);color:#111;font-weight:700;font-size:16px}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:var(--card);padding:10px 0 12px;box-shadow:0 -4px 14px rgba(0,0,0,.1)}
+nav div{text-align:center;font-size:11px;color:var(--sub)}
+nav div b{display:block;font-size:20px}
+nav .on{color:var(--p);font-weight:700}
+#t{position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:10px 18px;border-radius:99px;font-size:13px;opacity:0;transition:.3s}
+</style></head><body>
+<div class="hero"><h1>BDU PREMIUM 🎓</h1><p>Notes, quizzes & mock exams for BDU students</p></div>
+<div class="wrap">
+  <div class="card" onclick="toast('Chapter 1 opens in Phase 3 ✅')"><div class="ic">📘</div><div><h3>Chapter 1</h3><small>Notes • 100 Questions • Mock</small></div><span class="tag free">FREE</span></div>
+  <div class="card" onclick="toast('🔒 Premium required')"><div class="ic">📗</div><div><h3>Chapter 2</h3><small>Notes • 100 Questions • Mock</small></div><span class="tag lock">🔒 PREMIUM</span></div>
+  <div class="card" onclick="toast('🔒 Premium required')"><div class="ic">📙</div><div><h3>Chapter 3</h3><small>Notes • 100 Questions • Mock</small></div><span class="tag lock">🔒 PREMIUM</span></div>
+</div>
+<button class="btn" onclick="toast('Payment comes in Phase 5 💳')">⭐ Unlock Premium</button>
+<nav><div class="on"><b>🏠</b>Home</div><div><b>📝</b>Exams</div><div><b>⭐</b>Premium</div><div><b>👤</b>Profile</div></nav>
+<div id="t"></div>
+<script>
+function toast(m){var t=document.getElementById('t');t.textContent=m;t.style.opacity=1;setTimeout(function(){t.style.opacity=0},1800)}
+</script></body></html>
