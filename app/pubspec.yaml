@@ -1,19 +1,22 @@
-
 name: premium_bdu
 description: BDU PREMIUM
-publish_to: 'none'
+publish_to: none
 version: 1.0.0+1
-
 environment:
   sdk: '>=3.3.0 <4.0.0'
-
 dependencies:
   flutter:
     sdk: flutter
   webview_flutter: ^4.10.0
   android_id: ^0.4.0
-
+  image_picker: ^1.1.2
+dev_dependencies:
+  flutter_launcher_icons: ^0.14.3
 flutter:
   uses-material-design: true
   assets:
     - assets/www/
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/www/icon.png"
