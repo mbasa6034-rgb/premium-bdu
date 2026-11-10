@@ -1,0 +1,16 @@
+name: Deploy content
+on:
+  push:
+    branches: [main]
+    paths: ['content/**', 'scripts/**']
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Upload to Supabase
+        env:
+          U: ${{ secrets.SUPABASE_URL }}
+          K: ${{ secrets.SB_SECRET }}
+        run: python3 scripts/deploy.py
