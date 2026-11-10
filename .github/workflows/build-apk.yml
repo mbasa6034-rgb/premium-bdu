@@ -1,0 +1,37 @@
+name: Build APK
+on:
+  push:
+    branches: [main]
+    paths: ['app/**', '.github/workflows/build-apk.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Create Android project
+        run: flutter create --platforms=android --org com.bdupremium --project-name premium_bdu out
+      - name: Copy my files
+        run: |
+          cp app/pubspec.yaml out/pubspec.yaml
+          cp -r app/lib/. out/lib/
+          mkdir -p out/assets
+          cp -r app/assets/. out/assets/
+      - name: Build
+        run: cd out && flutter pub get && flutter build apk --release
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ github.run_number }}
+          name: BDU PREMIUM v${{ github.run_number }}
+          files: out/build/app/outputs/flutter-apk/app-release.apk
