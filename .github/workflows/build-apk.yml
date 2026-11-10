@@ -30,16 +30,44 @@ jobs:
           cp -r app/lib/. out/lib/
           mkdir -p out/assets
           cp -r app/assets/. out/assets/
-      - name: Android settings
+      - name: Android settings and screenshot block
         run: |
           M=out/android/app/src/main/AndroidManifest.xml
           sed -i 's|<application|<uses-permission android:name="android.permission.INTERNET"/><application|' $M
           sed -i 's|android:label="premium_bdu"|android:label="BDU PREMIUM"|' $M
+          F=$(find out/android/app/src/main -name 'MainActivity.kt' | head -1)
+          cat > "$F" <<'EOF'
+          package com.bdupremium.premium_bdu
+
+          import android.os.Bundle
+          import android.view.WindowManager
+          import io.flutter.embedding.android.FlutterActivity
+
+          class MainActivity : FlutterActivity() {
+              override fun onCreate(savedInstanceState: Bundle?) {
+                  super.onCreate(savedInstanceState)
+                  window.setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                                  WindowManager.LayoutParams.FLAG_SECURE)
+              }
+          }
+          EOF
+      - name: Packages
+        run: cd out && flutter pub get
+      - name: Icon
+        run: cd out && if [ -f assets/www/icon.png ]; then dart run flutter_launcher_icons; fi
       - name: Build
-        run: cd out && flutter pub get && flutter build apk --release
+        run: cd out && flutter build apk --release
+      - name: Sign with my permanent key
+        env:
+          KS: ${{ secrets.KEYSTORE_BASE64 }}
+          PW: ${{ secrets.KEYSTORE_PASSWORD }}
+        run: |
+          printf '%s' "$KS" | base64 -d > k.jks
+          BT=$(ls -d $ANDROID_HOME/build-tools/* | sort -V | tail -1)
+          $BT/apksigner sign --ks k.jks --ks-pass env:PW --key-pass env:PW --ks-key-alias bdu --out BDU-PREMIUM.apk out/build/app/outputs/flutter-apk/app-release.apk
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ github.run_number }}
           name: BDU PREMIUM v${{ github.run_number }}
-          files: out/build/app/outputs/flutter-apk/app-release.apk
+          files: BDU-PREMIUM.apk
