@@ -1,10 +1,108 @@
 {
   "no": 1,
-  "title": "Introduction",
+  "title": "General Physics",
   "free": true,
   "items": [
-    {"kind":"notes","title":"Best Notes","data":{"html":"<h3>Sample note</h3><p>Write your notes here using HTML.</p>"}},
-    {"kind":"questions","title":"100 Questions","data":{"items":[{"q":"2 + 2 = ?","o":["3","4","5","6"],"a":1,"e":"2 + 2 = 4"}]}},
-    {"kind":"mock","title":"Mock Exam 1","data":{"items":[{"q":"10 / 2 = ?","o":["2","4","5","8"],"a":2,"e":"10 / 2 = 5"}]}}
+    {
+      "kind": "notes",
+      "title": "General Physics Notes",
+      "data": {
+        "html": "<h3>1. Units and Measurement</h3><p>Physics measures things with units. The SI (international) units are:</p><ul><li><b>Length:</b> metre (m)</li><li><b>Mass:</b> kilogram (kg)</li><li><b>Time:</b> second (s)</li><li><b>Force:</b> newton (N)</li><li><b>Energy and work:</b> joule (J)</li><li><b>Power:</b> watt (W)</li></ul><h3>2. Scalars and Vectors</h3><p><b>Scalar:</b> has size only (distance, speed, mass, time).</p><p><b>Vector:</b> has size and direction (displacement, velocity, force, momentum).</p><h3>3. Motion</h3><p>Speed = distance ÷ time</p><p>Acceleration = change in velocity ÷ time</p><p>Free fall: acceleration due to gravity g = 9.8 m/s² (about 10 m/s²).</p><h3>4. Newton's Laws</h3><ul><li><b>1st law (inertia):</b> an object stays at rest or keeps moving at constant velocity unless a force acts on it.</li><li><b>2nd law:</b> F = m × a</li><li><b>3rd law:</b> every action has an equal and opposite reaction.</li></ul><h3>5. Work, Energy and Power</h3><p>Work = force × distance (in the direction of the force)</p><p>Kinetic energy = ½ × m × v²</p><p>Potential energy = m × g × h</p><p>Power = work ÷ time</p><p>Momentum = mass × velocity</p>"
+      }
+    },
+    {
+      "kind": "questions",
+      "title": "Practice Questions",
+      "data": {
+        "items": [
+          {
+            "q": "What is the SI unit of force?",
+            "o": ["Joule", "Newton", "Watt", "Pascal"],
+            "a": 1,
+            "e": "Force is measured in newtons (N)."
+          },
+          {
+            "q": "Which of these is a vector quantity?",
+            "o": ["Speed", "Mass", "Velocity", "Time"],
+            "a": 2,
+            "e": "Velocity has both size and direction."
+          },
+          {
+            "q": "What is the approximate acceleration due to gravity on Earth?",
+            "o": ["9.8 m/s²", "98 m/s²", "0.98 m/s²", "1.8 m/s²"],
+            "a": 0,
+            "e": "g is about 9.8 m/s²."
+          },
+          {
+            "q": "A car moves at 20 m/s for 5 seconds. How far does it travel?",
+            "o": ["4 m", "25 m", "100 m", "15 m"],
+            "a": 2,
+            "e": "Distance = speed × time = 20 × 5 = 100 m."
+          },
+          {
+            "q": "Newton's first law is also called the law of:",
+            "o": ["Acceleration", "Inertia", "Gravity", "Action and reaction"],
+            "a": 1,
+            "e": "Inertia: objects resist changes in their motion."
+          },
+          {
+            "q": "What is the SI unit of power?",
+            "o": ["Watt", "Joule", "Newton", "Hertz"],
+            "a": 0,
+            "e": "Power is measured in watts (W). 1 W = 1 J/s."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "mock",
+      "title": "General Physics Mock Exam",
+      "data": {
+        "items": [
+          {
+            "q": "A 5 kg object accelerates at 2 m/s². What is the force acting on it?",
+            "o": ["2.5 N", "7 N", "10 N", "25 N"],
+            "a": 2,
+            "e": "F = m × a = 5 × 2 = 10 N."
+          },
+          {
+            "q": "Which formula gives kinetic energy?",
+            "o": ["mgh", "½mv²", "mv", "Fd"],
+            "a": 1,
+            "e": "Kinetic energy = ½ × mass × velocity²."
+          },
+          {
+            "q": "Work done is equal to:",
+            "o": ["Force × distance in the direction of the force", "Force ÷ distance", "Mass × velocity", "Power × force"],
+            "a": 0,
+            "e": "Work = force × distance moved in the direction of the force."
+          },
+          {
+            "q": "A ball is thrown straight up. What is its velocity at the highest point?",
+            "o": ["Maximum", "Zero", "Equal to g", "Double the start speed"],
+            "a": 1,
+            "e": "At the top the ball stops for a moment, then falls."
+          },
+          {
+            "q": "Which of these is a scalar quantity?",
+            "o": ["Displacement", "Force", "Distance", "Momentum"],
+            "a": 2,
+            "e": "Distance has size only, with no direction."
+          },
+          {
+            "q": "Momentum is equal to:",
+            "o": ["Mass × velocity", "Mass × acceleration", "Force × distance", "Mass × time"],
+            "a": 0,
+            "e": "Momentum = mass × velocity."
+          },
+          {
+            "q": "1 kilowatt (kW) equals:",
+            "o": ["10 W", "100 W", "1000 W", "10000 W"],
+            "a": 2,
+            "e": "Kilo means 1000."
+          }
+        ]
+      }
+    }
   ]
 }
