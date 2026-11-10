@@ -65,9 +65,18 @@ jobs:
           printf '%s' "$KS" | base64 -d > k.jks
           BT=$(ls -d $ANDROID_HOME/build-tools/* | sort -V | tail -1)
           $BT/apksigner sign --ks k.jks --ks-pass env:PW --key-pass env:PW --ks-key-alias bdu --out BDU-PREMIUM.apk out/build/app/outputs/flutter-apk/app-release.apk
+      - name: Check the signature
+        run: |
+          BT=$(ls -d $ANDROID_HOME/build-tools/* | sort -V | tail -1)
+          $BT/apksigner verify --verbose --print-certs BDU-PREMIUM.apk
+          $BT/aapt dump badging BDU-PREMIUM.apk | grep -E "^package:|sdkVersion|targetSdkVersion|native-code" || true
+          ls -l BDU-PREMIUM.apk
+          cp out/build/app/outputs/flutter-apk/app-release.apk BDU-TEST-DEBUG.apk
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ github.run_number }}
           name: BDU PREMIUM v${{ github.run_number }}
-          files: BDU-PREMIUM.apk
+          files: |
+            BDU-PREMIUM.apk
+            BDU-TEST-DEBUG.apk
