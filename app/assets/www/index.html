@@ -5,32 +5,71 @@
 :root{--bg:#F8F9FC;--card:#fff;--text:#111827;--sub:#6B7280;--p:#4F46E5;--a:#F59E0B}
 @media(prefers-color-scheme:dark){:root{--bg:#0F1220;--card:#1A1E33;--text:#F3F4F6;--sub:#9CA3AF}}
 *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+input,.pay{user-select:text;-webkit-user-select:text}
 body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);padding-bottom:84px}
 .hero{background:linear-gradient(135deg,#4F46E5,#7C3AED);color:#fff;padding:36px 20px 48px;border-radius:0 0 28px 28px}
 .hero h1{font-size:26px}.hero p{opacity:.85;margin-top:6px;font-size:14px}
 .wrap{padding:0 16px;margin-top:-26px}
 .card{background:var(--card);border-radius:20px;padding:16px;margin-bottom:12px;box-shadow:0 4px 14px rgba(0,0,0,.08);display:flex;align-items:center;gap:14px}
-.ic{width:46px;height:46px;border-radius:14px;background:rgba(79,70,229,.12);display:grid;place-items:center;font-size:22px}
+.ic{width:46px;height:46px;border-radius:14px;background:rgba(79,70,229,.12);display:grid;place-items:center;font-size:22px;flex:none}
 .card h3{font-size:16px}.card small{color:var(--sub)}
-.tag{margin-left:auto;font-size:12px;font-weight:600;padding:4px 10px;border-radius:99px}
+.tag{margin-left:auto;font-size:12px;font-weight:600;padding:4px 10px;border-radius:99px;white-space:nowrap}
 .free{background:rgba(16,185,129,.15);color:#10B981}
 .lock{background:rgba(245,158,11,.15);color:#F59E0B}
 .btn{display:block;width:calc(100% - 32px);margin:12px 16px;padding:16px;border:0;border-radius:16px;background:var(--a);color:#111;font-weight:700;font-size:16px}
-nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:var(--card);padding:10px 0 12px;box-shadow:0 -4px 14px rgba(0,0,0,.1)}
-nav div{text-align:center;font-size:11px;color:var(--sub)}
+#upd{display:none;margin-bottom:12px;padding:12px 14px;border-radius:16px;background:var(--a);color:#111;font-weight:600;align-items:center;justify-content:space-between;gap:10px}
+#upd button{border:0;border-radius:10px;padding:8px 14px;background:#111;color:#fff;font-weight:700}
+nav{position:fixed;bottom:0;left:0;right:0;z-index:70;display:flex;justify-content:space-around;background:var(--card);padding:10px 0 12px;box-shadow:0 -4px 14px rgba(0,0,0,.1)}
+nav div{text-align:center;font-size:11px;color:var(--sub);flex:1}
 nav div b{display:block;font-size:20px}
 nav .on{color:var(--p);font-weight:700}
-#t{position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:10px 18px;border-radius:99px;font-size:13px;opacity:0;transition:.3s}
-</style></head><body>
+#t{position:fixed;bottom:96px;left:50%;transform:translateX(-50%);z-index:120;background:#111;color:#fff;padding:10px 18px;border-radius:99px;font-size:13px;opacity:0;transition:.3s;pointer-events:none;max-width:90%;text-align:center}
+.pg{position:fixed;inset:0;bottom:62px;z-index:50;background:var(--bg);color:var(--text);overflow:auto}
+.bar{position:sticky;top:0;display:flex;gap:12px;align-items:center;padding:16px;background:linear-gradient(135deg,#4F46E5,#7C3AED);color:#fff;font-weight:600}
+.bar b{font-size:22px;padding:0 8px}
+.bd{padding:16px}
+.em{text-align:center;color:var(--sub);margin-top:40px}
+.nt{line-height:1.7;font-size:16px}.nt h3{margin:14px 0 6px;color:var(--p)}
+.qq{margin:10px 0 16px;line-height:1.5}
+.op{background:var(--card);padding:14px;border-radius:14px;margin-bottom:10px;border:2px solid transparent;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.op.ok{border-color:#10B981;background:rgba(16,185,129,.15)}
+.op.no{border-color:#EF4444;background:rgba(239,68,68,.15)}
+.ex{background:rgba(245,158,11,.15);padding:12px;border-radius:12px;margin:10px 0;font-size:14px;line-height:1.5}
+.btn2{display:block;width:100%;padding:15px;border:0;border-radius:14px;background:var(--p);color:#fff;font-weight:700;font-size:16px;margin-top:12px}
+.box2{text-align:center;margin-top:60px}.box2 h2{font-size:28px}
+#wm{position:fixed;inset:0;z-index:60;pointer-events:none}
+#auth,#sheet{position:fixed;inset:0;z-index:99;display:flex;align-items:center;justify-content:center;padding:24px}
+#auth{background:linear-gradient(135deg,#4F46E5,#7C3AED)}
+#sheet{display:none;background:rgba(0,0,0,.55)}
+.box{background:#fff;color:#111827;border-radius:24px;padding:24px;width:100%;max-width:380px;text-align:center}
+.box h2{font-size:22px}.box p{color:#6B7280;margin-top:6px;font-size:14px}
+.box input{width:100%;padding:14px;margin-top:12px;border:1px solid #ddd;border-radius:14px;font-size:16px}
+.box button{width:100%;padding:15px;margin-top:16px;border:0;border-radius:14px;background:#F59E0B;color:#111;font-weight:700;font-size:16px}
+.box .alt{background:#E5E7EB}
+#sw{display:block;margin-top:14px;color:#4F46E5;font-weight:600}
+#er{display:block;margin-top:10px;color:#EF4444;font-size:13px}
+</style>
+<script>
+function okEl(t){t=t&&t.nodeType==3?t.parentNode:t;return !!(t&&t.closest&&t.closest('.pay,input'))}
+['contextmenu','copy','cut','dragstart','selectstart'].forEach(function(e){document.addEventListener(e,function(x){if(!okEl(x.target))x.preventDefault()})});
+</script>
+</head><body>
 <div class="hero"><h1>BDU PREMIUM 🎓</h1><p>Notes, quizzes & mock exams for BDU students</p></div>
 <div class="wrap">
-  <div class="card" onclick="toast('Chapter 1 opens in Phase 3 ✅')"><div class="ic">📘</div><div><h3>Chapter 1</h3><small>Notes • 100 Questions • Mock</small></div><span class="tag free">FREE</span></div>
-  <div class="card" onclick="toast('🔒 Premium required')"><div class="ic">📗</div><div><h3>Chapter 2</h3><small>Notes • 100 Questions • Mock</small></div><span class="tag lock">🔒 PREMIUM</span></div>
-  <div class="card" onclick="toast('🔒 Premium required')"><div class="ic">📙</div><div><h3>Chapter 3</h3><small>Notes • 100 Questions • Mock</small></div><span class="tag lock">🔒 PREMIUM</span></div>
+  <div id="upd"><span>🔔 New update available</span><button id="ub">Refresh</button></div>
+  <div id="list"></div>
 </div>
-<button class="btn" onclick="toast('Payment comes in Phase 5 💳')">⭐ Unlock Premium</button>
-<nav><div class="on"><b>🏠</b>Home</div><div><b>📝</b>Exams</div><div><b>⭐</b>Premium</div><div><b>👤</b>Profile</div></nav>
+<button class="btn" id="unl">⭐ Unlock Premium</button>
+<nav>
+  <div class="on" id="nh"><b>🏠</b>Home</div>
+  <div id="ne"><b>📝</b>Exams</div>
+  <div id="np"><b>⭐</b>Premium</div>
+  <div id="npr"><b>👤</b>Profile</div>
+</nav>
 <div id="t"></div>
 <script>
-function toast(m){var t=document.getElementById('t');t.textContent=m;t.style.opacity=1;setTimeout(function(){t.style.opacity=0},1800)}
-</script></body></html>
+function toast(m){var t=document.getElementById('t');t.textContent=m;t.style.opacity=1;clearTimeout(window._tt);window._tt=setTimeout(function(){t.style.opacity=0},2200)}
+</script>
+<script src="auth.js"></script>
+<script src="app.js"></script>
+</body></html>
