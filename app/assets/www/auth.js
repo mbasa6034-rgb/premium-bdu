@@ -29,7 +29,7 @@ $('go').onclick=function(){var p=$('ph').value.trim(),w=$('pw').value;
  if(!/^0[79]\d{8}$/.test(p))return err('Enter a valid phone like 09XXXXXXXX');
  if(w.length<6)return err('Password must be at least 6 characters');
  err('Please wait...');
- api(signup?'/auth/v1/signup':'/auth/v1/token?grant_type=password',{email:p+'@bdupremium.app',password:w}).then(function(x){
+ api(signup?'/auth/v1/signup':'/auth/v1/token?grant_type=password',{email:p+'@gmail.com',password:w}).then(function(x){
   if(x.ok&&x.j.access_token){save(x.j,p);enter()}
   else err(x.j.msg||x.j.error_description||x.j.message||'Failed')}).catch(function(){err('No internet connection')})};
 $('npr').onclick=function(){if(S){$('who').textContent='📱 '+S.p;sh.style.display='flex'}};
