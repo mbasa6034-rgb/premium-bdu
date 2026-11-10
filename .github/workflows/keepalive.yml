@@ -1,0 +1,10 @@
+name: Keep alive
+on:
+  schedule:
+    - cron: '0 6 */3 * *'
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -s "https://gpqmzioipdpgfwymjjfp.supabase.co/rest/v1/content_version?select=version" -H "apikey: sb_publishable_hA9Shuy0QkhkX-VN0Ymzzw_yYMUegyW"
