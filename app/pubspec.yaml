@@ -8,6 +8,8 @@ dependencies:
   flutter:
     sdk: flutter
   webview_flutter: ^4.10.0
+    webview_flutter: ^4.10.0
+  android_id: ^0.4.0
 flutter:
   uses-material-design: true
   assets:
