@@ -6,6 +6,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+concurrency:
+  group: build
+  cancel-in-progress: true
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,6 +30,11 @@ jobs:
           cp -r app/lib/. out/lib/
           mkdir -p out/assets
           cp -r app/assets/. out/assets/
+      - name: Android settings
+        run: |
+          M=out/android/app/src/main/AndroidManifest.xml
+          sed -i 's|<application|<uses-permission android:name="android.permission.INTERNET"/><application|' $M
+          sed -i 's|android:label="premium_bdu"|android:label="BDU PREMIUM"|' $M
       - name: Build
         run: cd out && flutter pub get && flutter build apk --release
       - name: Release
