@@ -57,6 +57,12 @@ class _ShellState extends State<Shell> {
       ))
       ..loadFlutterAsset('assets/www/splash.html');
     setState(() => ready = true);
+    Future.delayed(const Duration(seconds: 5), () async {
+      final u = await c.currentUrl() ?? '';
+      if (u.contains('splash.html')) {
+        c.loadFlutterAsset('assets/www/index.html');
+      }
+    });
   }
 
   @override
