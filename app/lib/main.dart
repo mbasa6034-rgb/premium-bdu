@@ -3,6 +3,7 @@ import 'package:android_id/android_id.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 void main() {
@@ -30,7 +31,7 @@ class _ShellState extends State<Shell> {
     final id = await AndroidId().getId() ?? 'unknown';
     c = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(const Color(0xFF0F1220))
+      ..setBackgroundColor(const Color(0xFF0B0E1A))
       ..addJavaScriptChannel('Native', onMessageReceived: (m) async {
         if (m.message == 'pick') {
           final f = await ImagePicker().pickImage(
@@ -40,10 +41,20 @@ class _ShellState extends State<Shell> {
           c.runJavaScript("window.onPicked('$b64')");
         }
       })
-      ..setNavigationDelegate(NavigationDelegate(onPageFinished: (_) {
-        c.runJavaScript(
-            "window.DEVICE_ID='$id';window.dispatchEvent(new Event('deviceready'));");
-      }))
+      ..setNavigationDelegate(NavigationDelegate(
+        onNavigationRequest: (req) {
+          final u = req.url;
+          if (u.startsWith('file:') || u.startsWith('about:') || u.startsWith('data:')) {
+            return NavigationDecision.navigate;
+          }
+          launchUrl(Uri.parse(u), mode: LaunchMode.externalApplication);
+          return NavigationDecision.prevent;
+        },
+        onPageFinished: (_) {
+          c.runJavaScript(
+              "window.DEVICE_ID='$id';window.dispatchEvent(new Event('deviceready'));");
+        },
+      ))
       ..loadFlutterAsset('assets/www/index.html');
     setState(() => ready = true);
   }
@@ -59,7 +70,7 @@ class _ShellState extends State<Shell> {
         if (!r.toString().contains('1')) SystemNavigator.pop();
       },
       child: Scaffold(
-        backgroundColor: const Color(0xFF0F1220),
+        backgroundColor: const Color(0xFF0B0E1A),
         body: SafeArea(
           child: ready
               ? WebViewWidget(controller: c)
