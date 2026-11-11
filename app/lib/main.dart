@@ -31,7 +31,7 @@ class _ShellState extends State<Shell> {
     final id = await AndroidId().getId() ?? 'unknown';
     c = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(const Color(0xFF0B0E1A))
+      ..setBackgroundColor(const Color(0xFF1E1B4B))
       ..addJavaScriptChannel('Native', onMessageReceived: (m) async {
         if (m.message == 'pick') {
           final f = await ImagePicker().pickImage(
@@ -55,7 +55,7 @@ class _ShellState extends State<Shell> {
               "window.DEVICE_ID='$id';window.dispatchEvent(new Event('deviceready'));");
         },
       ))
-      ..loadFlutterAsset('assets/www/index.html');
+      ..loadFlutterAsset('assets/www/splash.html');
     setState(() => ready = true);
   }
 
@@ -70,7 +70,7 @@ class _ShellState extends State<Shell> {
         if (!r.toString().contains('1')) SystemNavigator.pop();
       },
       child: Scaffold(
-        backgroundColor: const Color(0xFF0B0E1A),
+        backgroundColor: const Color(0xFF1E1B4B),
         body: SafeArea(
           child: ready
               ? WebViewWidget(controller: c)
