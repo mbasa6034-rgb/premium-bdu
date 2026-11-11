@@ -19,7 +19,7 @@ def call(method, path, body=None, prefer=None):
         msg = e.read().decode() if hasattr(e, "read") else ""
         raise SystemExit("FAILED %s %s: %s %s" % (method, path, msg, e))
 
-courses = {}
+courses, keep = {}, set()
 files = [f for f in sorted(glob.glob("content/**/*.json", recursive=True))
          if os.path.basename(f) != "settings.json"]
 
@@ -36,6 +36,7 @@ for f in files:
     row = call("POST", "chapters?on_conflict=course_id,no",
                [{"course_id": courses[ck], "no": no, "title": c["title"], "is_free": free}],
                "resolution=merge-duplicates,return=representation")[0]
+    keep.add((courses[ck], no))
     call("DELETE", "chapter_content?chapter_id=eq.%d" % row["id"])
     rows = []
     for it in c["items"]:
@@ -45,8 +46,7 @@ for f in files:
         if it["kind"] in EX and not free and len(qs) > FREE_Q:
             rows.append(dict(base, part=0, premium_part=False,
                              data={"items": qs[:FREE_Q], "total": len(qs)}))
-            rows.append(dict(base, part=1, premium_part=True,
-                             data={"items": qs[FREE_Q:]}))
+            rows.append(dict(base, part=1, premium_part=True, data={"items": qs[FREE_Q:]}))
         else:
             if it["kind"] in EX:
                 d = dict(d)
@@ -56,6 +56,16 @@ for f in files:
         call("POST", "chapter_content", rows)
     print("OK", f, "->", cname, "Y%d S%d" % (y, s), "chapter", no, "free" if free else "premium")
 
+for ch in call("GET", "chapters?select=id,course_id,no&limit=10000") or []:
+    if (ch["course_id"], ch["no"]) not in keep:
+        call("DELETE", "chapters?id=eq.%d" % ch["id"])
+        print("Removed chapter", ch["id"])
+used = {cid for cid, _ in keep}
+for co in call("GET", "courses?select=id&limit=10000") or []:
+    if co["id"] not in used:
+        call("DELETE", "courses?id=eq.%d" % co["id"])
+        print("Removed course", co["id"])
+
 if os.path.exists("content/settings.json"):
     st = json.load(open("content/settings.json", encoding="utf-8"))
     call("POST", "settings?on_conflict=key",
@@ -63,4 +73,4 @@ if os.path.exists("content/settings.json"):
     print("OK settings")
 
 call("PATCH", "content_version?id=eq.1", {"version": int(time.time())})
-print("Version bumped. Users will see the update button.")
+print("Done. Users will see the update button.")
