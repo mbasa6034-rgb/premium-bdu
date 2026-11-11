@@ -4,7 +4,7 @@
   "free": true,
   "items": [
     {
-      "kind": "notes"
+      "kind": "notes",
       "title": "General Physics Notes",
       "data": {
         "html": "<h3>1. Units and Measurement</h3><p>Physics measures things with units. The SI (international) units are:</p><ul><li><b>Length:</b> metre (m)</li><li><b>Mass:</b> kilogram (kg)</li><li><b>Time:</b> second (s)</li><li><b>Force:</b> newton (N)</li><li><b>Energy and work:</b> joule (J)</li><li><b>Power:</b> watt (W)</li></ul><h3>2. Scalars and Vectors</h3><p><b>Scalar:</b> has size only (distance, speed, mass, time).</p><p><b>Vector:</b> has size and direction (displacement, velocity, force, momentum).</p><h3>3. Motion</h3><p>Speed = distance ÷ time</p><p>Acceleration = change in velocity ÷ time</p><p>Free fall: acceleration due to gravity g = 9.8 m/s² (about 10 m/s²).</p><h3>4. Newton's Laws</h3><ul><li><b>1st law (inertia):</b> an object stays at rest or keeps moving at constant velocity unless a force acts on it.</li><li><b>2nd law:</b> F = m × a</li><li><b>3rd law:</b> every action has an equal and opposite reaction.</li></ul><h3>5. Work, Energy and Power</h3><p>Work = force × distance (in the direction of the force)</p><p>Kinetic energy = ½ × m × v²</p><p>Potential energy = m × g × h</p><p>Power = work ÷ time</p><p>Momentum = mass × velocity</p>"
